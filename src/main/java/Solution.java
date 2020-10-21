@@ -21,45 +21,32 @@ class TreeNode {
 
 
 public class Solution {
-    public int first = Integer.MAX_VALUE;
-    public int second = Integer.MAX_VALUE;
-    public int count = 0;
 
-    public int findSecondMinimumValue(TreeNode root) {
-        help(root);
-        return count == 0 ? -1 : second;
-    }
+    public TreeNode trimBST(TreeNode root, int low, int high) {
+        if (root == null) return null;
+        if (root.val > high) return trimBST(root.left,low,high);
+        if (root.val < low) return trimBST(root.right,low,high);
 
-    public void help(TreeNode root){
-        if (root == null){
-            return;
-        }
-        if (root.val < first){
-            second = first;
-            first = root.val;
-        }else if (root.val <= second && root.val > first){
-            count++;
-            second = root.val;
-        }
-        help(root.left);
-        help(root.right);
+        root.left = trimBST(root.left,low,high);
+        root.right = trimBST(root.right,low,high);
 
+        return root;
     }
 
     public static void main(String[] args) {
-        TreeNode treeNode1 = new TreeNode(2);
-        TreeNode treeNode2 = new TreeNode(2);
-        TreeNode treeNode3 = new TreeNode(5);
+        TreeNode treeNode1 = new TreeNode(3);
+        TreeNode treeNode2 = new TreeNode(0);
+        TreeNode treeNode3 = new TreeNode(2);
 
-        TreeNode treeNode4 = new TreeNode(5);
-        TreeNode treeNode5 = new TreeNode(5);
+        TreeNode treeNode4 = new TreeNode(1);
+        TreeNode treeNode5 = new TreeNode(4);
         treeNode1.left = treeNode2;
-        treeNode1.right = treeNode3;
-
+        treeNode2.right = treeNode3;
         treeNode3.left = treeNode4;
-        treeNode3.right = treeNode5;
 
-        new Solution().findSecondMinimumValue(treeNode1);
+        treeNode1.right = treeNode5;
+
+        new Solution().trimBST(treeNode1,1,3);
 
 
     }

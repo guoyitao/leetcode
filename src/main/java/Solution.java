@@ -1,6 +1,5 @@
-import sun.reflect.generics.tree.Tree;
-
-import java.util.*;
+import java.util.Random;
+import java.util.Scanner;
 
 class TreeNode {
     int val;
@@ -24,30 +23,15 @@ class TreeNode {
 
 public class Solution {
 
-    public int longestPalindrome(String s) {
-        Map<Character, Integer> map = new HashMap<>();
-        int result = 0;
-        for (char c : s.toCharArray()) {
-            if (!map.containsKey(c)){
-                map.put(c,1);
-            }else{
-                map.put(c,map.get(c) +1);
-            }
-        }
-        int ji = 0;
-        for (Integer value : map.values()) {
-            if (value % 2 == 0){
-                result += value;
-            }else{
-                ji++;
-            }
-        }
-        return ji != 0 ?result +1 : result ;
-    }
+
 
     public static void main(String[] args) {
-        System.out.println(new Solution().longestPalindrome("aaacccccccaablk"));
-
+        for (int i = 1; i <= 9; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.printf("%d*%d=%d   ",j,i,i*j);
+            }
+            System.out.println();
+        }
     }
 
 }
